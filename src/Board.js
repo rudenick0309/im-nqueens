@@ -8,44 +8,44 @@
     initialize: function(params) {
       if (_.isUndefined(params) || _.isNull(params)) {
         console.log(
-          'Good guess! But to use the Board() constructor, you must pass it an argument in one of the following formats:',
+          "Good guess! But to use the Board() constructor, you must pass it an argument in one of the following formats:"
         );
         console.log(
-          '\t1. An object. To create an empty board of size n:\n\t\t{n: %c<num>%c} - Where %c<num> %cis the dimension of the (empty) board you wish to instantiate\n\t\t%cEXAMPLE: var board = new Board({n:5})',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: grey;',
+          "\t1. An object. To create an empty board of size n:\n\t\t{n: %c<num>%c} - Where %c<num> %cis the dimension of the (empty) board you wish to instantiate\n\t\t%cEXAMPLE: var board = new Board({n:5})",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: grey;"
         );
         console.log(
-          '\t2. An array of arrays (a matrix). To create a populated board of size n:\n\t\t[ [%c<val>%c,%c<val>%c,%c<val>%c...], [%c<val>%c,%c<val>%c,%c<val>%c...], [%c<val>%c,%c<val>%c,%c<val>%c...] ] - Where each %c<val>%c is whatever value you want at that location on the board\n\t\t%cEXAMPLE: var board = new Board([[1,0,0],[0,1,0],[0,0,1]])',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: blue;',
-          'color: black;',
-          'color: grey;',
+          "\t2. An array of arrays (a matrix). To create a populated board of size n:\n\t\t[ [%c<val>%c,%c<val>%c,%c<val>%c...], [%c<val>%c,%c<val>%c,%c<val>%c...], [%c<val>%c,%c<val>%c,%c<val>%c...] ] - Where each %c<val>%c is whatever value you want at that location on the board\n\t\t%cEXAMPLE: var board = new Board([[1,0,0],[0,1,0],[0,0,1]])",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: blue;",
+          "color: black;",
+          "color: grey;"
         );
-      } else if (params.hasOwnProperty('n')) {
-        this.set(makeEmptyMatrix(this.get('n')));
+      } else if (params.hasOwnProperty("n")) {
+        this.set(makeEmptyMatrix(this.get("n")));
       } else {
-        this.set('n', params.length);
+        this.set("n", params.length);
       }
     },
 
@@ -53,13 +53,13 @@
     // 결과적으로 2차원 배열 형태의 체스 판이 반환됩니다.
     // ex)
     // [
-    //  [0,0,0,0],
+    //  [1,0,0,0],
     //  [0,0,0,0],
     //  [0,0,0,0],
     //  [0,0,0,0]
     // ]
     rows: function() {
-      return _(_.range(this.get('n'))).map(function(rowIndex) {
+      return _(_.range(this.get("n"))).map(function(rowIndex) {
         return this.get(rowIndex);
       }, this);
     },
@@ -67,7 +67,7 @@
     // 특정 좌표에 말이 없으면 올리고, 이미 있으면 내립니다.
     togglePiece: function(rowIndex, colIndex) {
       this.get(rowIndex)[colIndex] = +!this.get(rowIndex)[colIndex];
-      this.trigger('change');
+      this.trigger("change");
     },
 
     // 특정 좌표가 주어졌을 때, 해당 좌표를 지나는 주대각선의 첫 번째 행 컬럼을 반환합니다.
@@ -115,10 +115,10 @@
         this.hasRowConflictAt(rowIndex) ||
         this.hasColConflictAt(colIndex) ||
         this.hasMajorDiagonalConflictAt(
-          this._getFirstRowColumnIndexForMajorDiagonalOn(rowIndex, colIndex),
+          this._getFirstRowColumnIndexForMajorDiagonalOn(rowIndex, colIndex)
         ) ||
         this.hasMinorDiagonalConflictAt(
-          this._getFirstRowColumnIndexForMinorDiagonalOn(rowIndex, colIndex),
+          this._getFirstRowColumnIndexForMinorDiagonalOn(rowIndex, colIndex)
         )
       );
     },
@@ -127,9 +127,9 @@
     _isInBounds: function(rowIndex, colIndex) {
       return (
         rowIndex >= 0 &&
-        rowIndex < this.get('n') &&
+        rowIndex < this.get("n") &&
         colIndex >= 0 &&
-        colIndex < this.get('n')
+        colIndex < this.get("n")
       );
     },
     /* eslint-enable */
@@ -148,10 +148,13 @@
 
     // ROWS - run from left to right
     // --------------------------------------------------------------
-    //
+
+    // 검사를 해 주는 함수 - 배열의 엘리먼트 1, 0
+
     // 주어진 행(rowIndex)에 충돌하는 말이 있는지 확인합니다.
     hasRowConflictAt: function(rowIndex) {
       return false; // fixme
+      // 한 열에 두개 이상? - false / 충돌 없으면 true;
     },
 
     // 체스 판 위에 행 충돌이 하나라도 있는지 검사합니다.
@@ -164,6 +167,8 @@
     //
     // 주어진 열(colIndex)에 충돌하는 말이 있는지 확인합니다.
     hasColConflictAt: function(colIndex) {
+      console.log(11, colIndex);
+      console.log(22, this.get(colIndex));
       return false; // fixme
     },
 
@@ -177,6 +182,7 @@
     //
     // 주어진 주대각선에 충돌하는 말이 있는지 확인합니다.
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
+      // console.log(majorDiagonalColumnIndexAtFirstRow);
       return false; // fixme
     },
 
@@ -196,7 +202,7 @@
     // 체스 판 위에 반대각선 충돌이 하나라도 있는지 검사합니다.
     hasAnyMinorDiagonalConflicts: function() {
       return false; // fixme
-    },
+    }
 
     /* --------------------  End of Helper Functions  --------------------- */
   });
