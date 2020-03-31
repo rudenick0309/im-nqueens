@@ -148,10 +148,6 @@
 
     // ROWS - run from left to right
     // --------------------------------------------------------------
-<<<<<<< HEAD
-
-    // 검사를 해 주는 함수 - 배열의 엘리먼트 1, 0
-=======
     //
 
     // recursion(재귀)에 대해 익숙한 활용능력, 스킬
@@ -169,44 +165,30 @@
     // (조건이 만족하는 경우라는 조건 때문에 경우에 따라 훨씬 빠를 수 있다)
     // 개념 링크: https://medium.com/@jeongdowon/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-backtracking-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-13492b18bfa1
     // 관련 코드 예시: https://github.com/DeekshaPrabhakar/JavaScript/wiki/Backtracking
->>>>>>> 22ed4e97475b7a6975a64ed2d74db85f59ea86ba
 
     // 주어진 행(rowIndex)에 충돌하는 말이 있는지 확인합니다.
     // 1. 어떠한 행에 부딪히는 말이 있는지 확인
     hasRowConflictAt: function(rowIndex) {
-<<<<<<< HEAD
-      return false; // fixme
-      // 한 열에 두개 이상? - false / 충돌 없으면 true;
-=======
-      // console.log("a", rowIndex);
-      // console.log(this.get(rowIndex));
-      var countRow = 0;
-      var numRow = this.get(rowIndex);
-      // 배열을 할당, 이 배열을 순회를 하면서 count를 할 것. 1이 있는지.
-      // 1이 있다면 countRow를 ++
-      // console.log(this.get("1"));
-      numRow.forEach(function(ele) {
-        if (ele === 1) {
-          countRow += 1;
-        }
-      });
-      // console.log(countRow);
-      if (countRow > 1) {
-        // console.log("c");
+      let row = this.attributes[rowIndex];
+      // console.log(1, this);
+      // console.log(11, row);
+      // console.log(2, this.attributes);
+
+      let count = 0;
+      for (let i = 0; i < row.length; i++) {
+        count += row[i];
+      }
+      if (count > 1) {
         return true;
       } else {
-        // console.log("d");
         return false;
       }
->>>>>>> 22ed4e97475b7a6975a64ed2d74db85f59ea86ba
     },
 
     // 체스 판 위에 행 충돌이 하나라도 있는지 검사합니다.
     // 2. 체스판 전체 행에 부딪히는 말이 있는지 확인
     hasAnyRowConflicts: function() {
-      var hang = this.get("n");
-
-      for (let i = 0; i < hang; i += 1) {
+      for (let i = 0; i < this.get("n"); i += 1) {
         if (this.hasRowConflictAt(i)) {
           return true;
         }
@@ -220,33 +202,31 @@
     // 주어진 열(colIndex)에 충돌하는 말이 있는지 확인합니다.
     // 3. 어떠한 열에 부딪히는 말이 있는지 확인
     hasColConflictAt: function(colIndex) {
-<<<<<<< HEAD
-      console.log(11, colIndex);
-      console.log(22, this.get(colIndex));
-      return false; // fixme
-=======
-      // row 개수랑 col 개수가 같으니까 row 개수를 가져오자
+      console.log(12, colIndex);
+      let col = this.attributes;
       let count = 0;
-      const row = this.get("n");
-      // console.log("asdasd");
-      row.forEach(function(rowele) {
-        if (rowele === 1) {
-          var result = this.get("n");
-          count += result[colIndex];
-        }
-      });
+      console.log("what ", col.n);
+      for (let i = 0; i < col.n; i += 1) {
+        console.log("22", i, colIndex);
+        count += col[i][colIndex];
+      }
       if (count > 1) {
         return true;
       } else {
         return false;
       }
->>>>>>> 22ed4e97475b7a6975a64ed2d74db85f59ea86ba
     },
 
     // 체스 판 위에 열 충돌이 하나라도 있는지 검사합니다.
     // 4. 체스판 전체 열에 부딪히는 말이 있는지 확인
     hasAnyColConflicts: function() {
-      return false; // fixme
+      for (let i = 0; i < this.get("n"); i += 1) {
+        if (this.hasColConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
+      // return false; // fixme
     },
 
     // Major Diagonals - go from top-left to bottom-right
