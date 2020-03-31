@@ -148,17 +148,69 @@
 
     // ROWS - run from left to right
     // --------------------------------------------------------------
+<<<<<<< HEAD
 
     // 검사를 해 주는 함수 - 배열의 엘리먼트 1, 0
+=======
+    //
+
+    // recursion(재귀)에 대해 익숙한 활용능력, 스킬
+
+    // DFS(깊이 우선 탐색): Stack 구조를 활용
+    // - 사용하는 경우: 모든 노드를 탐색하고자 하는 경우에 사용한다
+
+    // BFS(너비 우선 탐색): Queue를 사용한다. / 선입선출 원칙으로 탐색
+    // 시작 정점에서 가까운 정점을 먼저 방문, 멀리 있는 정점은 나중에 방문하는 순회방법
+    // 즉, 깊게 탐색하기 전에 넓게 탐색하는 방법
+    // 직관적이지 않다 / 재귀적으로 동작하지 않는다
+    // 시작노드에서 시작하여 거리에 따라 단계별로 탐색
+
+    // Backtracking: 모든 조합의 수를 살펴보는 것인데 단 조건이 만족할 때 만이다
+    // (조건이 만족하는 경우라는 조건 때문에 경우에 따라 훨씬 빠를 수 있다)
+    // 개념 링크: https://medium.com/@jeongdowon/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-backtracking-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-13492b18bfa1
+    // 관련 코드 예시: https://github.com/DeekshaPrabhakar/JavaScript/wiki/Backtracking
+>>>>>>> 22ed4e97475b7a6975a64ed2d74db85f59ea86ba
 
     // 주어진 행(rowIndex)에 충돌하는 말이 있는지 확인합니다.
+    // 1. 어떠한 행에 부딪히는 말이 있는지 확인
     hasRowConflictAt: function(rowIndex) {
+<<<<<<< HEAD
       return false; // fixme
       // 한 열에 두개 이상? - false / 충돌 없으면 true;
+=======
+      // console.log("a", rowIndex);
+      // console.log(this.get(rowIndex));
+      var countRow = 0;
+      var numRow = this.get(rowIndex);
+      // 배열을 할당, 이 배열을 순회를 하면서 count를 할 것. 1이 있는지.
+      // 1이 있다면 countRow를 ++
+      // console.log(this.get("1"));
+      numRow.forEach(function(ele) {
+        if (ele === 1) {
+          countRow += 1;
+        }
+      });
+      // console.log(countRow);
+      if (countRow > 1) {
+        // console.log("c");
+        return true;
+      } else {
+        // console.log("d");
+        return false;
+      }
+>>>>>>> 22ed4e97475b7a6975a64ed2d74db85f59ea86ba
     },
 
     // 체스 판 위에 행 충돌이 하나라도 있는지 검사합니다.
+    // 2. 체스판 전체 행에 부딪히는 말이 있는지 확인
     hasAnyRowConflicts: function() {
+      var hang = this.get("n");
+
+      for (let i = 0; i < hang; i += 1) {
+        if (this.hasRowConflictAt(i)) {
+          return true;
+        }
+      }
       return false; // fixme
     },
 
@@ -166,13 +218,33 @@
     // --------------------------------------------------------------
     //
     // 주어진 열(colIndex)에 충돌하는 말이 있는지 확인합니다.
+    // 3. 어떠한 열에 부딪히는 말이 있는지 확인
     hasColConflictAt: function(colIndex) {
+<<<<<<< HEAD
       console.log(11, colIndex);
       console.log(22, this.get(colIndex));
       return false; // fixme
+=======
+      // row 개수랑 col 개수가 같으니까 row 개수를 가져오자
+      let count = 0;
+      const row = this.get("n");
+      // console.log("asdasd");
+      row.forEach(function(rowele) {
+        if (rowele === 1) {
+          var result = this.get("n");
+          count += result[colIndex];
+        }
+      });
+      if (count > 1) {
+        return true;
+      } else {
+        return false;
+      }
+>>>>>>> 22ed4e97475b7a6975a64ed2d74db85f59ea86ba
     },
 
     // 체스 판 위에 열 충돌이 하나라도 있는지 검사합니다.
+    // 4. 체스판 전체 열에 부딪히는 말이 있는지 확인
     hasAnyColConflicts: function() {
       return false; // fixme
     },
@@ -181,12 +253,21 @@
     // --------------------------------------------------------------
     //
     // 주어진 주대각선에 충돌하는 말이 있는지 확인합니다.
+    /*
+     * 5. 어떠한 위치가 주어졌을 때 좌측 위로 올라가다보면,
+     * 왼쪽상단에서 우측하단쪽으로 내려오는 대각선의 머리가 나온다,
+     * 그 머리가 포함된 대각선의 말이 부딪히는가 확인하는 함수
+     */
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       // console.log(majorDiagonalColumnIndexAtFirstRow);
       return false; // fixme
     },
 
     // 체스 판 위에 주대각선 충돌이 하나라도 있는지 검사합니다.
+    /*
+     * 6. 체스판 내의 모든 대각선을 좌측상단에서 우측 하단으로 내려오는
+     * 방향으로 검사했을 때 겹치는 말이 있는지 확인하는 함수
+     */
     hasAnyMajorDiagonalConflicts: function() {
       return false; // fixme
     },
@@ -195,11 +276,20 @@
     // --------------------------------------------------------------
     //
     // 주어진 반대각선에 충돌하는 말이 있는지 확인합니다.
+    /*
+     * 7. 특정 위치가 주어졌을 때 우측 위로 올라가다보면 오른쪽상단에서
+     * 좌측하단쪽으로 내려오는 대각선의 머리가 나온다, 그 머리가 포함된
+     * 대각선의 말이 겹치는가 확인하는 함수
+     */
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
       return false; // fixme
     },
 
     // 체스 판 위에 반대각선 충돌이 하나라도 있는지 검사합니다.
+    /*
+     * 8. 체스판 내의 모든 대각선을 우측상단에서 좌측 하단으로 내려오는
+     * 방향으로 검사했을 때 겹치는 말이 있는지 확인하는 함수
+     */
     hasAnyMinorDiagonalConflicts: function() {
       return false; // fixme
     }
@@ -215,4 +305,80 @@
     });
   };
   /* eslint-enable */
-})();
+})(); /*
+    return function (graph, start, goal) {
+      return hasPath(graph, start, goal);
+    };
+  }());
+  exports.dfs = dfs;
+}(typeof exports === 'undefined' ? window : exports));*/
+
+// 그래프 탐색이란?
+// 하나의 정점으로부터 시작해서 차례대로 모든 정점들을 하나씩 방문하는 것(ex: 특정 도시에서 다른 도시로 갈 수 있는지 없는지)
+
+// 깊이 우선 탐색이란?(DFS)
+// 루트(root)노드에서 혹은 다른 임의의 노드에서 시작해서 다음분기(branch)fh 넘어가기 전에 해당 분기를 완벽하게 탐색하는 방법
+// - 미로를 탐색할 때 한길로 쭉 가다가 막혔을 때, 가장 가까운 길로 돌아와 그곳에서 다른길로 다시 탐색하는 방법
+// - 사용하는 경우: 모든 노드를 탐색하고자 하는 경우에 사용한다
+
+// 깊이 우선 탐색의 특징
+// 1. 자기 자신을 호출하는 순환 형태의 알고리즘 형태를 가지고 있다
+// 2. 이 알고리즘을 구현할 때 가장 큰 차이점은, 어떤 노드를 방문했었는지의 여부를 반드시 검사해야 한다
+// 3. 이를 검사하지 않을 경우 무한 루프에 빠질 위험이 있다
+
+// ========================================================================================
+// 깊이 우선 탐색의 구현
+// 구현 방법 2가지
+// 1. 순환 호출 이용
+// 2. 명시적인 스택사용(Last in First Out) - 명시적인 스택을 사용하여 방문한 정점들을 스택에 저장하였다가 다시 꺼내어 작업한다.
+// 3. 순환 호출을 이용한 DFS의 의사코드(pseodo code)
+/*
+(function (exports) {
+  'use strict';
+  var dfs = (function () {
+    function hasPath(graph, current, goal) {
+      var stack = [];
+      var visited = [];
+      var node;
+      stack.push(current);
+      visited[current] = true;
+      while (stack.length) {
+        node = stack.pop();
+        if (node === goal) {
+          return true;
+        }
+        for (var i = 0; i < graph[node].length; i += 1) {
+          if (graph[node][i] && !visited[i]) {
+            stack.push(i);
+            visited[i] = true;
+          }
+        }
+      }
+      return false;
+    } */
+/*
+ * Depth-First graph searching algorithm.
+ * Returns whether there's a path between two nodes in a graph.<br><br>
+ * Time complexity: O(|V|^2).
+ *
+ * @module graphs/searching/dfs
+ * @public
+ * @param {Array} graph Adjacency matrix, which represents the graph.
+ * @param {Number} start Start node.
+ * @param {Number} goal Target node.
+ * @return {Boolean} Returns true if path between two nodes exists.
+ *
+ * @example
+ * var dfs = require('../src/graphs/searching/dfs').dfs;
+ * var graph = [[1, 1, 0, 0, 1, 0],
+ *              [1, 0, 1, 0, 1, 0],
+ *              [0, 1, 0, 1, 0, 0],
+ *              [0, 0, 1, 0, 1, 1],
+ *              [1, 1, 0, 1, 0, 0],
+ *              [0, 0, 0, 1, 0, 0]];
+ * var pathExists = dfs(graph, 1, 5); // true
+ */
+// ========================================================================================
+
+// 깊이 우선 탐색(DFS)의 시간 복잡도
+// 1. DFS는 그래프(정점의 수: N, 간선의 수: E)의 모든 간선을 조회한다.
